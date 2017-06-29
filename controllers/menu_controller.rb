@@ -77,7 +77,7 @@ class MenuController
     end
 
     def read_csv
-
+        # import_from_csv("entries.csv")
     end
 
     def entry_submenu(entry)
