@@ -10,10 +10,11 @@ class MenuController
     def main_menu
         puts "Main Menu - #{address_book.entries.count} entries"
         puts "1 - View all entries"
-        puts "2 - Create an entry"
-        puts "3 - Search for an entry"
-        puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
+        puts "2 - View a specific entry"
+        puts "3 - Create an entry"
+        puts "4 - Search for an entry"
+        puts "5 - Import entries from a CSV"
+        puts "6 - Exit"
         print "Enter your selection: "
 
         selection = gets.to_i
@@ -25,17 +26,21 @@ class MenuController
                 main_menu
             when 2
                 system "clear"
-                create_entry
+                view_specific_entry
                 main_menu
             when 3
                 system "clear"
-                search_entries
+                create_entry
                 main_menu
             when 4
                 system "clear"
-                read_csv
+                search_entries
                 main_menu
             when 5
+                system "clear"
+                read_csv
+                main_menu
+            when 6
                 puts "Good-bye!"
                 exit(0)
             else
@@ -54,6 +59,34 @@ class MenuController
 
         system "clear"
         puts "End of entries"
+    end
+
+    def view_specific_entry
+        num_entries = address_book.entries.length
+        if num_entries > 1
+            puts "There are #{num_entries} entries."
+            print "Enter a number from 1 to #{num_entries} to view: "
+            selection = gets.chomp.to_i
+            if selection <= num_entries && selection != 0
+                system "clear"
+                puts "You selected entry #{selection}:"
+                puts address_book.entries[selection - 1]
+            else
+                system "clear"
+                puts "#{selection} is not a valid entry number."
+                view_specific_entry
+            end
+        elsif num_entries == 1
+            puts "There is only one entry:"
+            puts address_book.entries[0]
+        else
+            puts "There are no entries to display."
+        end
+
+        print "Press Enter to return to the main menu: "
+        gets.chomp
+        system "clear"
+        main_menu
     end
 
     def create_entry
