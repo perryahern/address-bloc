@@ -45,7 +45,21 @@ class AddressBook
                 lower = mid + 1
             end
         end
-
         return nil
+    end
+
+    def iterative_search(name)
+        iteration = 0
+        max_iteration = entries.length - 1
+
+        while iteration <= max_iteration && name != entries[iteration].name
+            iteration += 1
+        end
+        
+        if iteration > max_iteration
+            return nil
+        else
+            return entries[iteration]
+        end
     end
 end
