@@ -14,6 +14,7 @@ class MenuController
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
         puts "5 - Exit"
+        puts "9 - Ragnarok"
         print "Enter your selection: "
 
         selection = gets.to_i
@@ -38,6 +39,10 @@ class MenuController
             when 5
                 puts "Good-bye!"
                 exit(0)
+            when 9
+                system "clear"
+                ragnarok
+                main_menu
             else
                 system "clear"
                 puts "Sorry, that is not a valid input"
@@ -103,6 +108,21 @@ class MenuController
             puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
             read_csv
         end
+    end
+
+    def ragnarok
+        puts "Ragnarok will cleanse the world to begin anew."
+        print "Enter R to remove all those you know: "
+        response = gets.chomp
+        if response == 'R'
+            address_book.entries.clear
+            system "clear"
+            puts "Into the abyss..."
+        else
+            system "clear"
+            puts "Crisis averted; the world endures."
+        end
+        main_menu
     end
 
     def entry_submenu(entry)
